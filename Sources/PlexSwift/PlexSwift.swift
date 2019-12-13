@@ -355,9 +355,9 @@ extension Plex {
         return urlSession.dataTaskPublisher(for: request)
     }
 
-    private func download(_ url: String, to saveLocation: URL, token: String? = nil, timeoutInterval: TimeInterval? = nil) -> Publishers.Future<URLResponse, Swift.Error> {
+    private func download(_ url: String, to saveLocation: URL, token: String? = nil, timeoutInterval: TimeInterval? = nil) -> Future<URLResponse, Swift.Error> {
         let request = makeURLRequest(urlString: url, method: HTTPMethod.get, token: token, timeoutInterval: timeoutInterval)
-        return Publishers.Future { observer in
+        return Future { observer in
             self.urlSession.downloadTask(with: request) { (url, response, error) in
                 if let error = error {
                     observer(.failure(error))
